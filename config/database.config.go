@@ -19,7 +19,7 @@ func SetupDatabaseConnection() *gorm.DB {
 		DB_HOST     = "localhost"
 		DB_USER     = "postgres"
 		DB_PASSWORD = "arif1412"
-		DB_NAME     = "movies"
+		DB_NAME     = "mini_db"
 		Db_PORT     = "5432"
 	)
 

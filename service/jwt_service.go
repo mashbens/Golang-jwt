@@ -6,14 +6,13 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt"
-
-	"github.com/gin-gonic/gin"
+	"github.com/labstack/echo/v4"
 )
 
 //JWTService is a contract of what jwtService can do
 type JWTService interface {
 	GenerateToken(userID string) string
-	ValidateToken(token string, ctx *gin.Context) *jwt.Token
+	ValidateToken(token string, ctx echo.Context) *jwt.Token
 }
 
 type jwtCustomClaim struct {
@@ -59,7 +58,7 @@ func (j *jwtService) GenerateToken(UserID string) string {
 	return t
 }
 
-func (j *jwtService) ValidateToken(token string, ctx *gin.Context) *jwt.Token {
+func (j *jwtService) ValidateToken(token string, ctx echo.Context) *jwt.Token {
 	t, err := jwt.Parse(token, func(t_ *jwt.Token) (interface{}, error) {
 		if _, ok := t_.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("Unexpected signing method %v", t_.Header["alg"])
